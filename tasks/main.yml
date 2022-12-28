@@ -1,0 +1,36 @@
+---
+- name: Install packages
+  ansible.builtin.package:
+    name: "{{ packages }}"
+    state: present
+
+- name: Deploy files
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default(omit) }}"
+    owner: "{{ item.owner | default(omit) }}"
+    group: "{{ item.group | default(omit) }}"
+    validate: "{{ item.validate | default(omit) }}"
+  loop: "{{ files }}"
+  notify:
+    - Restart service
+
+- name: Deploy templates
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default(omit) }}"
+    owner: "{{ item.owner | default(omit) }}"
+    group: "{{ item.group | default(omit) }}"
+    validate: "{{ item.validate | default(omit) }}"
+  loop: "{{ templates }}"
+  notify:
+    - Restart service
+
+- name: Start service
+  ansible.builtin.service:
+    name: "{{ item.name }}"
+    enabled: "{{ item.enabled | default('yes') }}"
+    state: "{{ item.state | default('started') }}"
+  loop: "{{ services }}"

@@ -1,0 +1,20 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include ansible-role-packageinstall"
+      ansible.builtin.include_role:
+        name: "ansible-role-packageinstall"
+      vars:
+        packages:
+          - nginx
+        services:
+          - name: nginx
+            enabled: false
+            # allow_restart: no
+        files:
+          - src: files/testfile01
+            dest: /tmp/testfile01
+        templates:
+          - src: files/testtemplate01.j2
+            dest: /tmp/testtemplate01

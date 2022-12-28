@@ -1,0 +1,22 @@
+---
+lint: |
+  set -e
+  yamllint .
+  ansible-lint -f rich
+dependency:
+  name: galaxy
+driver:
+  name: podman
+platforms:
+  - name: packageinstall01
+    image: rockylinux/rockylinux:8
+    pre_build_image: false
+    privileged: true
+    command: "/sbin/init"
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../shared_files/converge.yml
+    prepare: ../shared_files/prepare.yml
+verifier:
+  name: ansible

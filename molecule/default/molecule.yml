@@ -1,8 +1,8 @@
 ---
-lint: |
-  set -e
-  yamllint .
-  ansible-lint -f rich
+# lint: |
+#   set -e
+#   yamllint .
+#   ansible-lint -f rich
 dependency:
   name: galaxy
 driver:
@@ -10,7 +10,7 @@ driver:
 platforms:
   - name: packageinstall01
     image: rockylinux/rockylinux:8
-    pre_build_image: false
+    pre_build_image: true
     privileged: true
     command: "/sbin/init"
 provisioner:

@@ -10,7 +10,8 @@ driver:
 platforms:
   - name: packageinstall01
     image: rockylinux/rockylinux:8
-    pre_build_image: true
+    pre_build_image: false
+    dockerfile: Dockerfile.j2
     privileged: true
     command: "/sbin/init"
 provisioner:

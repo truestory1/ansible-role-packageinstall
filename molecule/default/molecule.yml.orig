@@ -6,7 +6,7 @@
 dependency:
   name: galaxy
 driver:
-  name: delegated
+  name: docker
 platforms:
   - name: packageinstall01
     image: rockylinux/rockylinux:8

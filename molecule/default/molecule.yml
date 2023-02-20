@@ -2,7 +2,7 @@
 lint: |
   set -e
   yamllint .
-  ansible-lint -f rich
+  ansible-lint -f full
 dependency:
   name: galaxy
 driver:

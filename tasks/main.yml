@@ -28,7 +28,7 @@
   notify:
     - Restart service
 
-- name: Start service
+- name: Start and enable service
   ansible.builtin.service:
     name: "{{ item.name }}"
     enabled: "{{ item.enabled | default('yes') }}"

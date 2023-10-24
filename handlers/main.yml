@@ -2,7 +2,6 @@
 - name: Restart service
   ansible.builtin.service:
     name: "{{ item.name }}"
-    enabled: "{{ item.enabled | default('yes') }}"
     state: restarted
   when: item.allow_restart | default('yes') | bool
   loop: "{{ services }}"
